@@ -14,5 +14,10 @@ namespace parcial1.contreras.Controllers
             return View();
         }
 
+        public ActionResult Cosmo()
+        {
+            return View();
+        }
+
     }
 }

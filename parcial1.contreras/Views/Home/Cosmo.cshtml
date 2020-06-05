@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewBag.Title = "Cosmo";
+}
+<h2>Cosmo</h2>
+<h2>Alta de Constelacion</h2>
+
+<div>
+    <table>
+        <tr>
+            <th>
+                Siglo
+            </th>
+            <td>
+                <input id="txtSiglo" type="text" placeholder="Representa el siglo de descubrimiento" />
+            </td>
+        </tr>
+        <tr>
+            <th>Nombre</th>
+            <td> <input id="txtNombre" type="text" placeholder="Nombre de la constelación" /> </td>
+        </tr>
+        <tr>
+            <th></th>
+            <td>
+                <input type="button" value="Grabar" id="btnSave" class="myButton" />
+                <input type="button" value="Listar" id="btnToList" class="myButton" />
+            </td>
+        </tr>
+    </table>
+
+    <p>
+        <h3>Listado de Constelaciones</h3>
+    </p>
+    <div id="divBody">No hay registros</div>
+</div>
+
+@section scripts
+{
+
+    <script>
+
+        var constelaciones = new Array();
+
+        function Constelacion() {
+            this.setSiglo = function (value) { this._siglo = value; }
+            this.getSiglo = function () { return this._siglo };
+
+            this.setNombre = function (value) { this._nombre = value; }
+            this.getNombre = function () { return this._nombre };
+        }
+
+        $("#btnSave").click(function () {
+
+            if ($("#txtSiglo").val() == "")
+                alert("Debe ingresar un siglo");
+
+            let constelacion = new Constelacion();
+            constelacion.setSiglo($("#txtSiglo").val());
+            constelacion.setNombre($("#txtNombre").val());
+            constelaciones.push(constelacion);
+
+            $("#txtSiglo").val("");
+            $("#txtNombre").val("");
+
+        });
+
+        $("#btnToList").click(function () {
+
+            var elem = $("#divBody");
+            elem.html("");
+
+            $.each(constelaciones, function (i, e) {
+                elem.append("<span>" + e.getSiglo() + " - " + e.getNombre() + "</span> <br />")
+            });
+
+        });
+
+    </script>
+
+}
+
